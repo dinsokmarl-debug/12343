@@ -1,178 +1,122 @@
 import React, { useState } from 'react';
 import {
-  ArrowLeft, Download, Filter, ChevronRight,
-  Headphones, CheckCircle2, Copy, AlertCircle
+  ArrowLeft, ChevronDown, Download, Share2, 
+  ChevronRight, SlidersHorizontal, ChevronUp
 } from 'lucide-react';
 import transactionsData from './data.json';
 import './index.css';
 
-// Custom icons for perfect match
-const ChevronDownSolid = () => (
-  <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor">
-    <path d="M5 6L0 0H10L5 6Z" />
+const FilterIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="4" y1="21" x2="4" y2="14" />
+    <line x1="4" y1="10" x2="4" y2="3" />
+    <line x1="12" y1="21" x2="12" y2="12" />
+    <line x1="12" y1="8" x2="12" y2="3" />
+    <line x1="20" y1="21" x2="20" y2="16" />
+    <line x1="20" y1="12" x2="20" y2="3" />
+    <line x1="1" y1="14" x2="7" y2="14" />
+    <line x1="9" y1="8" x2="15" y2="8" />
+    <line x1="17" y1="16" x2="23" y2="16" />
   </svg>
 );
 
-const DownloadBox = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="5" y="3" width="14" height="18" rx="2" ry="2" />
-    <path d="M12 15V9" />
-    <path d="M9 12L12 15L15 12" />
-  </svg>
+const SparkleIcon = () => (
+  <div style={{ color: '#91bfff' }}>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2L14.5 9H22L16 14L18.5 21L12 17L5.5 21L8 14L2 9H9.5L12 2Z" />
+    </svg>
+  </div>
 );
-
-const ScamReportIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" />
-    <path d="M9 9l6 6M15 9l-6 6" />
-  </svg>
-);
-
-function WithdrawalDetail({ tx, onBack }) {
-  const amountWithoutSign = tx.amount.replace('-', '');
-
-  return (
-    <div className="detail-container">
-      <header className="header">
-        <ArrowLeft size={24} strokeWidth={2} onClick={onBack} style={{ cursor: 'pointer' }} />
-        <span className="header-title" style={{ fontSize: '18px' }}>Withdrawal Details</span>
-        <Headphones size={24} strokeWidth={1.5} />
-      </header>
-
-      <div className="detail-content">
-        <div className="detail-top">
-          <h1 className="detail-main-amount">{tx.amount} {tx.asset}</h1>
-          <div className="status-badge">
-            <CheckCircle2 size={16} color="#03a66d" fill="#03a66d" stroke="#ffffff" />
-            <span className="status-text">Completed</span>
-          </div>
-          <p className="detail-info">
-            Crypto transferred out of Binance. Please contact the recipient platform for your transaction receipt.
-          </p>
-          <a href="#" className="detail-support-link">Why hasn't my withdrawal arrived?</a>
-        </div>
-
-        <div className="detail-list">
-          <div className="detail-row">
-            <span className="detail-label">Network</span>
-            <span className="detail-value">{tx.asset}</span>
-          </div>
-          <div className="detail-row">
-            <span className="detail-label">Address</span>
-            <div className="detail-value-container">
-              <span className="detail-value">146902064</span>
-              <Copy size={14} color="#707a8a" />
-              <a href="#" className="save-address-link">Save Address</a>
-            </div>
-          </div>
-          <div className="detail-row">
-            <span className="detail-label">Txid</span>
-            <div className="detail-value-container" style={{ width: '60%', textAlign: 'right' }}>
-              <span className="detail-value txid-text" style={{ wordBreak: 'break-all' }}>
-                {tx.txid}
-              </span>
-              <Copy size={14} color="#707a8a" />
-            </div>
-          </div>
-          <div className="detail-row">
-            <span className="detail-label">Amount</span>
-            <span className="detail-value">{amountWithoutSign} {tx.asset}</span>
-          </div>
-          <div className="detail-row">
-            <span className="detail-label">Network fee</span>
-            <span className="detail-value">0.0001 {tx.asset}</span>
-          </div>
-          <div className="detail-row">
-            <span className="detail-label">Wallet</span>
-            <span className="detail-value">Spot Wallet</span>
-          </div>
-          <div className="detail-row">
-            <span className="detail-label">Date</span>
-            <span className="detail-value">{tx.date}</span>
-          </div>
-        </div>
-
-        <div className="scam-report">
-          <ScamReportIcon />
-          <span>Scam Report</span>
-        </div>
-      </div>
-
-      <div className="detail-footer">
-        <button className="withdraw-again-btn">Withdraw Again</button>
-      </div>
-      <div className="footer-indicator" style={{ height: '5px', width: '134px', background: '#e1e1e1', borderRadius: '5px', margin: '10px auto' }}></div>
-    </div>
-  );
-}
 
 function App() {
-  const [activeTab, setActiveTab] = useState('Crypto address');
-  const [selectedTx, setSelectedTx] = useState(null);
-
-  if (selectedTx) {
-    return <WithdrawalDetail tx={selectedTx} onBack={() => setSelectedTx(null)} />;
-  }
+  const [activeTab, setActiveTab] = useState('Order History');
 
   return (
     <div className="iphone-container">
       {/* Header */}
-      <header className="header">
-        <ArrowLeft size={24} strokeWidth={2} />
-        <div className="header-center" style={{ marginLeft: '12px' }}>
-          <div className="header-title-container">
-            <span className="header-title" style={{ marginRight: '4px' }}>Assets</span>
-            <ChevronDownSolid />
-          </div>
-          <span className="header-subtitle">Withdraw</span>
+      <header className="trade-header">
+        <div className="back-btn">
+          <ArrowLeft size={24} />
         </div>
-        <div style={{ marginLeft: 'auto' }}>
-          <DownloadBox />
+        <div className="header-title-group">
+          <div className="header-main-title">
+            My Trades <ChevronDown size={16} strokeWidth={3} />
+          </div>
+          <span className="header-sub-title">Spot</span>
+        </div>
+        <div className="download-btn" style={{ padding: '8px' }}>
+          <Download size={24} />
         </div>
       </header>
 
       {/* Tabs */}
-      <div className="tabs-container">
-        <div className="tabs">
-          {['Crypto address', 'Binance account', 'Cash'].map((tab) => (
-            <div
-              key={tab}
-              className={`tab ${activeTab === tab ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab}
-            </div>
-          ))}
-        </div>
-        <div className="filter-icon">
-          <Filter size={24} strokeWidth={1.5} />
-        </div>
-      </div>
-
-      {/* Support Section */}
-      <a href="#" className="support-link" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
-        <span style={{ color: '#707a8a' }}>Why hasn't my withdrawal arrived?</span>
-        <ChevronRight size={18} color="#707a8a" strokeWidth={1.5} />
-      </a>
-
-      {/* List */}
-      <div className="transaction-list">
-        {transactionsData.map((tx) => (
-          <div key={tx.id} className="transaction-item" style={{ paddingBottom: '20px' }} onClick={() => setSelectedTx(tx)}>
-            <div className="tx-left">
-              <span className="tx-asset" style={{ fontSize: '18px', fontWeight: '600' }}>{tx.asset}</span>
-              <span className="tx-date" style={{ color: '#707a8a', fontSize: '13px', marginTop: '4px' }}>{tx.date}</span>
-            </div>
-            <div className="tx-right">
-              <span className="tx-amount" style={{ fontSize: '18px', color: '#f6465d', fontWeight: '400' }}>{tx.amount}</span>
-              <span className="tx-status" style={{ color: '#b7bdc6', fontSize: '13px', marginTop: '4px' }}>{tx.status}</span>
-            </div>
+      <div className="trade-tabs-row">
+        {['Open Orders', 'Order History', 'Trade History'].map((tab) => (
+          <div
+            key={tab}
+            className={`trade-tab ${activeTab === tab ? 'active' : ''}`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
           </div>
         ))}
       </div>
 
-      {/* Bottom Home Indicator */}
-      <div className="footer-indicator" style={{ height: '5px', width: '134px', background: '#e1e1e1', borderRadius: '5px', margin: '20px auto' }}></div>
+      {/* Filters */}
+      <div className="filters-container">
+        {['Pair', 'Order Type', 'Direction', 'Status'].map((filter) => (
+          <div key={filter} className="filter-pill">
+            {filter} <ChevronDown size={12} strokeWidth={3} color="#707a8a" />
+          </div>
+        ))}
+        <div className="filter-icon-right">
+          <FilterIcon />
+        </div>
+      </div>
+
+      {/* Order List */}
+      <div className="order-list">
+        {transactionsData.map((order) => (
+          <div key={order.id} className="order-item">
+            <div className="order-row-top">
+              <div className="order-pair-group">
+                <span className="pair-name">{order.pair}</span>
+                <Share2 size={16} color="#707a8a" strokeWidth={1.5} />
+              </div>
+              <div className="order-date-row">
+                {order.date}
+                <ChevronRight size={16} color="#b7bdc6" />
+              </div>
+            </div>
+            
+            <div className={`order-type-dir ${order.direction.toLowerCase()}`}>
+              {order.type} / {order.direction}
+            </div>
+
+            <div className="order-grid-details">
+              <span className="grid-label">Amount</span>
+              <span className="grid-value">{order.amount_filled} / {order.amount_total}</span>
+              
+              <span className="grid-label">Price</span>
+              <span className="grid-value">{order.price_filled} / {order.price_total}</span>
+              
+              <span className="grid-label">Status</span>
+              <span className={`grid-value status-value ${order.status.toLowerCase()}`}>
+                {order.status}
+              </span>
+            </div>
+          </div>
+        ))}
+        
+        <div className="no-more-data">
+          No more data
+        </div>
+      </div>
+
+      {/* Floating Sparkle Icon */}
+      <div className="floating-action-icon">
+         <SparkleIcon />
+      </div>
     </div>
   );
 }
