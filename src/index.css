@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --binance-black: #1e2329;
+  --binance-gray: #707a8a;
+  --binance-yellow: #fcd535;
+  --binance-red: #f6465d;
+  --binance-border: #eaecef;
+  --binance-bg: #ffffff;
+  --binance-hover: #f5f5f5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--binance-bg);
+  color: var(--binance-black);
+  -webkit-font-smoothing: antialiased;
+}
+
+.iphone-container {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: white;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-title-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.header-title {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.header-subtitle {
+  font-size: 12px;
+  color: var(--binance-black);
+  margin-top: 2px;
+}
+
+/* Tabs */
+.tabs-container {
+  display: flex;
+  border-bottom: 1px solid var(--binance-border);
+  padding: 0 16px;
+  position: relative;
+}
+
+.tabs {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+}
+
+.tab {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--binance-gray);
+  cursor: pointer;
+  position: relative;
+}
+
+.tab.active {
+  color: var(--binance-black);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background-color: var(--binance-yellow);
+  border-radius: 4px;
+}
+
+.filter-icon {
+  display: flex;
+  align-items: center;
+  color: var(--binance-black);
+  cursor: pointer;
+}
+
+/* Support Link */
+.support-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 16px;
+  color: var(--binance-gray);
+  font-size: 14px;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.2s;
+}
+
+.support-link:hover {
+  background: var(--binance-hover);
+}
+
+/* Transaction List */
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-item {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.transaction-item:hover {
+  background: var(--binance-hover);
+}
+
+.tx-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tx-asset {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--binance-black);
+}
+
+.tx-date {
+  font-size: 14px;
+  color: var(--binance-gray);
+}
+
+.tx-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.tx-amount {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--binance-red);
+}
+
+.tx-status {
+  font-size: 14px;
+  color: var(--binance-gray);
+}
+
+/* Footer spacing for mobile bar */
+.footer-bar {
+  height: 5px;
+  width: 140px;
+  background: #000;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.2;
+}
+
+/* Detail View */
+.detail-container {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: white;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.detail-content {
+  padding: 24px 16px;
+}
+
+.detail-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.detail-main-amount {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--binance-black);
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.status-text {
+  color: #03a66d;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.detail-info {
+  font-size: 13px;
+  color: var(--binance-gray);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  padding: 0 20px;
+}
+
+.detail-support-link {
+  color: var(--binance-yellow);
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.detail-list {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.detail-label {
+  color: var(--binance-gray);
+  font-size: 14px;
+}
+
+.detail-value {
+  color: var(--binance-black);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.detail-value-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  width: 70%;
+}
+
+.save-address-link {
+  color: var(--binance-yellow);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.txid-text {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+}
+
+.scam-report {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #707a8a;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.detail-footer {
+  position: fixed;
+  bottom: 40px;
+  padding: 0 16px;
+  width: 100%;
+  max-width: 430px;
+}
+
+.withdraw-again-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--binance-yellow);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--binance-black);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.withdraw-again-btn:hover {
+  opacity: 0.9;
+}
